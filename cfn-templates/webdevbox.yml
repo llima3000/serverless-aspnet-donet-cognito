@@ -1,0 +1,210 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >
+  CloudFormation teamplate for the dotnet serverless workshop.
+Parameters:
+  KeyName:
+    Description: The keypair to use to remotely access the servers
+    Type: AWS::EC2::KeyPair::KeyName
+
+  InstanceTypeParameter: 
+    Type: String
+    Default: t3.medium
+    AllowedValues: 
+      - t3.small
+      - t3.medium
+      - t3.large
+    Description: Enter t3.small, t3.medium, or t3.large. Default is t3.medium. For 12 hours of usage the approximate cost of t3.small or t3.medium or t3.large are lower than US$2.
+ 
+  WindowsAmiId:
+    Description: Windows Server AMI Id
+    Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
+    AllowedValues:
+      - "/aws/service/ami-windows-latest/Windows_Server-2016-English-Full-Base"
+      - "/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base"
+    Default: "/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base"
+
+  EventName:
+    Description: The event you are running.
+    Default: dotnet-serverless-workshop
+    Type: String
+
+Resources:
+  user:
+    Type: AWS::IAM::User
+    Properties: 
+      ManagedPolicyArns: 
+        - arn:aws:iam::aws:policy/AmazonAPIGatewayAdministrator
+        - arn:aws:iam::aws:policy/AWSLambdaFullAccess
+        - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
+        - arn:aws:iam::aws:policy/AWSXrayFullAccess
+        - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+
+  # Infrastructure + Instance
+  S3Log:
+    Type: AWS::S3::Bucket
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: '10.0.0.0/16'
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName} VPC
+
+  InternetGW:
+    Type : AWS::EC2::InternetGateway
+
+  # Route tables & routes (public/private)
+  InternetGWAttachment:
+    Type: "AWS::EC2::VPCGatewayAttachment"
+    Properties: 
+      InternetGatewayId: !Ref InternetGW
+      VpcId: !Ref VPC
+
+  InternetRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref VPC
+
+  InternetRoute:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGWAttachment
+    Properties:
+      RouteTableId: !Ref InternetRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGW
+
+  # Subnets public/private
+  PublicSubnet:
+    Type: "AWS::EC2::Subnet"
+    Properties:
+      CidrBlock: 10.0.0.0/24
+      MapPublicIpOnLaunch: true
+      VpcId: !Ref VPC
+
+  PublicRouteAssociation:
+    Type: "AWS::EC2::SubnetRouteTableAssociation"
+    Properties: 
+      RouteTableId: !Ref InternetRouteTable
+      SubnetId: !Ref PublicSubnet
+
+  WINstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Action: sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service: ec2.amazonaws.com
+          Sid: ''
+      Path: /
+      Policies:
+        - 
+          PolicyName: WINstanceS3InstancePolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - 
+                Effect: Allow
+                Action: 's3:*'
+                Resource: 
+                  - !GetAtt S3Log.Arn
+                  - !Sub "arn:aws:s3:::w1devbox-${S3Log}/*"
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+
+  WINstanceProfile:
+    Type: AWS::IAM::InstanceProfile 
+    DependsOn: [ WINstanceRole ]
+    Properties:
+      Roles: [ !Ref WINstanceRole ]
+
+  RDPAccess:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow RDP connections from the outside world
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 3389
+        ToPort: 3389
+        CidrIp: 0.0.0.0/0
+        Description: AllowRDP
+
+  WINstance:
+    Type: AWS::EC2::Instance
+    DependsOn: [ WINstanceProfile, RDPAccess, VPC, PublicSubnet ]
+    Properties:
+      InstanceType: !Ref InstanceTypeParameter
+      ImageId: !Ref WindowsAmiId
+      IamInstanceProfile: !Ref WINstanceProfile
+      KeyName: !Ref KeyName
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds: [ !GetAtt RDPAccess.GroupId ]
+      BlockDeviceMappings:
+      - DeviceName: /dev/sda1
+        Ebs:
+            VolumeSize: 50
+      Tags:
+        - 
+          Key: Name
+          Value: !Sub ${AWS::StackName}-DevBox
+        - 
+          Key: type
+          Value: windowsdevbox
+        - 
+          Key: event 
+          Value: !Sub "${EventName}"
+
+  SsmDocument:
+    Type: AWS::SSM::Document
+    Properties: 
+      Content:
+        schemaVersion: '2.2'
+        description: Composite document for bootstrapping Windows Dev Box.
+        parameters: {}
+        mainSteps:
+          - action: aws:updateSsmAgent
+            name: updateSSMAgent
+            inputs:
+              agentName: amazon-ssm-agent
+              source: !Sub "https://s3.${AWS::Region}.amazonaws.com/aws-ssm-${AWS::Region}/ssm-agent-manifest.json"
+          - action: aws:downloadContent
+            name: downloadContent
+            inputs:
+              sourceType: GitHub
+              sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-bootstrap.json"}'
+              destinationPath: bootstrap
+          - action: aws:runDocument
+            name: runDocument
+            inputs:
+              documentType: LocalPath
+              documentPath: bootstrap
+              documentParameters: '{}'
+      DocumentType: Command
+
+  SsmAssociation:
+      Type: AWS::SSM::Association
+      Properties:
+        AssociationName: WindowsDevBox
+        Name: !Ref SsmDocument
+        OutputLocation:
+          S3Location:
+            OutputS3BucketName: !Ref S3Log            
+        Targets:
+        - Key: tag:type
+          Values: 
+            - windowsdevbox
+            - dotnet-serverless-workshop            
+
+Outputs:
+  WINstanceId:
+    Description: Instance ID
+    Value: !Ref WINstance
+
+  WINstanceAddress:
+    Description: Instance DNS Name
+    Value: !GetAtt WINstance.PublicDnsName
