@@ -4,7 +4,7 @@ In this workshop you'll deploy a serverless web application based on AspNetCore 
 
 See the diagram below for a depiction of the complete architecture.
 
-![AspNetCore WebApp Architecture](images/diagram.jpeg)
+![AspNetCore WebApp Architecture](images/diagram.jpeg = 200)
 
 ## Initial environment setup
 
