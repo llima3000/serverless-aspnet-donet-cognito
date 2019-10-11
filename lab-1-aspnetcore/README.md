@@ -21,14 +21,19 @@ The steps in this lab will create a new AWS lambda AspNetCore to act as your mai
 ### Opening your project at VSCode
 
 1. Open VSCode. Go to File -> *Open Folder* and select the WebApp folder created on the previous step. It will load all the sub-directories and files for you.
+
    <img src="../images/vscodewebapp.png" width="250"/>
 
 ### Install nuget packages
 
 1. Right-cling on the WebApp directory that sits below of src directory and select *Open in Terminal*.
+
    <img src="../images/vscodeterminal.png" width="450"/>
+
 2. At VSCOde terminal window install all the nuget packages by typing:
+
    <img src="../images/vscodenuget.png" width="450"/>
+
 3. Add all these packages:
    ```
    dotnet add package Newtonsoft.Json
