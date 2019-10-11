@@ -6,7 +6,7 @@ See the diagram below for a depiction of the complete architecture.
 
 ![AspNetCore WebApp Architecture](images/diagram.jpeg)
 
-<img src="images/diagram.jpeg" alt="drawing" width="200"/>
+<img src="images/diagram.jpeg" alt="drawing" width="800"/>
 
 ## Initial environment setup
 
