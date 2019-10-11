@@ -12,7 +12,7 @@ See the diagram below for a depiction of the complete architecture.
 
 #### Laptop Machine
 
-**Before you start reading all the Pre-requisites, there is an option to execute a [Cloudformation script](cfn-templates/webdevbox.yml) that installs all the software required for you into a EC2 Windows Server for the Lab. This is a perfect option if you don't have much time to prepare or if you are lazy to install all the software required.**
+**Before you start reading all the Pre-requisites, there is an option to execute a [Cloudformation script](cfn-templates/webdevbox.yml), which installs all the software required into an EC2 Windows Server for following the workshop.** This is a perfect option if you don't have much time or just lazy to install all the software required. The cloudformation could be executed multiple time in one AWS Account, but this approach is not the ideal for running the workshop as the attendees can accidentally change someone's resources.
 
 A laptop with Wi-Fi running Microsoft Windows and Mac OS X with the following softwares installed:
 - An Internet browser such as Chrome, Firefox, Safari, or Edge.
@@ -32,11 +32,25 @@ A laptop with Wi-Fi running Microsoft Windows and Mac OS X with the following so
     brew tap aws/tap
     brew install aws-sam-cli
   ```
-- You favorite IDE for C# (VisualStudio or VSCode is recommended)
-- An AWS account. You will create AWS resources including IAM roles during the workshop.
-- An EC2 key pair created in the AWS region you are working in.
+- You favorite IDE for .DotNet (VisualStudio or VSCode is recommended)
 
+#### AWS Account
+- Ability to create AWS resources including EC2, SSM, Lambda, Api Gateway, Cognito and IAM Roles.
+- EC2 key pair created in the AWS region you are working in in case you use the EC2 instance instead your own computer
 
+> **Important Note:** This guide creates chargeable AWS resources. You may wish to remove these resources upon completion of the guide to avoid incurring future charges to your account. To do this, be sure to follow the instructions in *Clean up* module.
 
+## Modules
 
-- This workshop can be run in any of AWS regions: US East (N. Virginia), US East (Ohio), US West (Oregon), Asia Pacific (Singapore) and EU (Ireland).
+Follow the modules in order to successfully configure and deploy the sample application to AWS.
+
+| Labs |
+| ------------- |
+| [Creating the AspNetCore](lab-1-aspnetcore/) |
+| [Creating the backend serverless dotnet](lab-2-backend/) |
+| [Testing Lambda using SAM Local](lab-3-samlocal/) |
+| [Creating and configuring Amazon Cognito UserPools](lab-4-cognitouserpools/) |
+| [Creating and configuring Amazon Api Gateway](lab-5-apigateway/) |
+| [Adding OpenId to AspNetCore and inject jwt to backend](lab-6-jwttoken/) |
+| [Adding Monitoring and x-Ray](lab-7-monitoring/) |
+| [Clean up](lab-99-clean-up/) |
