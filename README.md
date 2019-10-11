@@ -4,7 +4,9 @@ In this workshop you'll deploy a serverless web application based on AspNetCore 
 
 See the diagram below for a depiction of the complete architecture.
 
-![AspNetCore WebApp Architecture](images/diagram.jpeg = 200)
+![AspNetCore WebApp Architecture](images/diagram.jpeg)
+
+<img src="images/diagram.jpeg" alt="drawing" width="200"/>
 
 ## Initial environment setup
 
@@ -53,4 +55,4 @@ Follow the modules in order to successfully configure and deploy the sample appl
 | [5 - Creating and configuring Amazon Api Gateway](lab-5-apigateway/) |
 | [6 - Adding OpenId to AspNetCore and inject jwt to backend](lab-6-jwttoken/) |
 | [7 - Adding Monitoring and x-Ray](lab-7-monitoring/) |
-| [8 - Clean up](lab-99-clean-up/) |
+| [99- Clean up](lab-99-clean-up/) |
