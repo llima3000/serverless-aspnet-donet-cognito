@@ -10,9 +10,9 @@ See the diagram below for a depiction of the complete architecture.
 
 ### Prerequisites
 
-### Laptop Machine
+#### Laptop Machine
 
-**Before you start reading all the Pre-requisites, there is an option to execute a [Cloudformation script](cfn-templates/webdevbox.yml) that installs all the software required for you into a EC2 Windows Server for the Lab. This is a perfect option if you don't have much time to prepare or if you are lazy to install all the software requirements.**
+**Before you start reading all the Pre-requisites, there is an option to execute a [Cloudformation script](cfn-templates/webdevbox.yml) that installs all the software required for you into a EC2 Windows Server for the Lab. This is a perfect option if you don't have much time to prepare or if you are lazy to install all the software required.**
 
 A laptop with Wi-Fi running Microsoft Windows and Mac OS X with the following softwares installed:
 - An Internet browser such as Chrome, Firefox, Safari, or Edge.
