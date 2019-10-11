@@ -27,7 +27,7 @@ A laptop with Wi-Fi running Microsoft Windows and Mac OS X with the following so
 - [Docker for Windows](https://docs.docker.com/docker-for-windows/install/) or [Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/)
 - AWS SAM CLI
   - [Windows](https://github.com/awslabs/aws-sam-cli/releases/latest/download/AWS_SAM_CLI_64_PY3.msi)
-  - Mac recommends installing AWS SAM CLI via [brew](https://brew.sh/). By following the commands:
+  - For Mac instalation it is recommended doing it via [brew](https://brew.sh/). By following the commands:
   ```
     brew tap aws/tap
     brew install aws-sam-cli
@@ -46,11 +46,11 @@ Follow the modules in order to successfully configure and deploy the sample appl
 
 | Labs |
 | ------------- |
-| [Creating the AspNetCore](lab-1-aspnetcore/) |
-| [Creating the backend serverless dotnet](lab-2-backend/) |
-| [Testing Lambda using SAM Local](lab-3-samlocal/) |
-| [Creating and configuring Amazon Cognito UserPools](lab-4-cognitouserpools/) |
-| [Creating and configuring Amazon Api Gateway](lab-5-apigateway/) |
-| [Adding OpenId to AspNetCore and inject jwt to backend](lab-6-jwttoken/) |
-| [Adding Monitoring and x-Ray](lab-7-monitoring/) |
-| [Clean up](lab-99-clean-up/) |
+| [1 - Creating the AspNetCore](lab-1-aspnetcore/) |
+| [2 - Creating the backend serverless dotnet](lab-2-backend/) |
+| [3 - Testing Lambda using SAM Local](lab-3-samlocal/) |
+| [4 - Creating and configuring Amazon Cognito UserPools](lab-4-cognitouserpools/) |
+| [5 - Creating and configuring Amazon Api Gateway](lab-5-apigateway/) |
+| [6 - Adding OpenId to AspNetCore and inject jwt to backend](lab-6-jwttoken/) |
+| [7 - Adding Monitoring and x-Ray](lab-7-monitoring/) |
+| [8 - Clean up](lab-99-clean-up/) |
