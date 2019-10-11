@@ -46,6 +46,7 @@ Follow the modules in order to successfully configure and deploy the sample appl
 
 | Labs |
 | ------------- |
+| [0 - Setup AWS Tools and credentials](lab-0-tools-and-cred/) |
 | [1 - Creating the AspNetCore](lab-1-aspnetcore/) |
 | [2 - Creating the backend serverless dotnet](lab-2-backend/) |
 | [3 - Testing Lambda using SAM Local](lab-3-samlocal/) |
