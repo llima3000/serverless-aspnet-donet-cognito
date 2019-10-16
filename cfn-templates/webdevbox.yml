@@ -38,9 +38,11 @@ Resources:
         - arn:aws:iam::aws:policy/AmazonCognitoPowerUser
         - arn:aws:iam::aws:policy/AWSXrayFullAccess
         - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+        - arn:aws:iam::aws:policy/IAMFullAccess
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
   # Infrastructure + Instance
-  S3Log:
+  S3Bucket:
     Type: AWS::S3::Bucket
 
   VPC:
@@ -111,8 +113,8 @@ Resources:
                 Effect: Allow
                 Action: 's3:*'
                 Resource: 
-                  - !GetAtt S3Log.Arn
-                  - !Sub "arn:aws:s3:::w1devbox-${S3Log}/*"
+                  - !GetAtt S3Bucket.Arn
+                  - !Sub "arn:aws:s3:::${S3Bucket}/*"
       ManagedPolicyArns:
       - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
 
@@ -205,7 +207,7 @@ Resources:
         Name: !Ref SsmDocument
         OutputLocation:
           S3Location:
-            OutputS3BucketName: !Ref S3Log            
+            OutputS3BucketName: !Ref S3Bucket            
         Targets:
         - Key: tag:type
           Values: 
