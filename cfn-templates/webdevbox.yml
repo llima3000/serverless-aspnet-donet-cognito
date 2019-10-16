@@ -193,7 +193,7 @@ Resources:
               sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-config-sofware.yaml"}'
               destinationPath: configSoftware
           - action: aws:runDocument
-            name: runConfigSofware
+            name: runConfigSoftware
             inputs:
               documentType: LocalPath
               documentPath: configSoftware
