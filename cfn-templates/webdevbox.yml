@@ -20,6 +20,7 @@ Parameters:
     Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
     AllowedValues:
       - "/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base"
+      - "/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-ContainersLatest"
     Default: "/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base"
 
   EventName:
@@ -175,13 +176,25 @@ Resources:
             name: downloadContent
             inputs:
               sourceType: GitHub
-              sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-bootstrap.json"}'
-              destinationPath: bootstrap
+              sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-install-sofware.yaml"}'
+              destinationPath: installSoftware
           - action: aws:runDocument
             name: runDocument
             inputs:
               documentType: LocalPath
-              documentPath: bootstrap
+              documentPath: installSoftware
+              documentParameters: '{}'
+          - action: aws:downloadContent
+            name: downloadContent
+            inputs:
+              sourceType: GitHub
+              sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-config-sofware.yaml"}'
+              destinationPath: configSofware
+          - action: aws:runDocument
+            name: runDocument
+            inputs:
+              documentType: LocalPath
+              documentPath: configSofware
               documentParameters: '{}'
       DocumentType: Command
 
