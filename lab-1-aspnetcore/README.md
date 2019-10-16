@@ -1,4 +1,4 @@
-# Lab 0: Creating the AspNetCore applicatoin
+# Lab 1: Creating the AspNetCore applicatoin
 
 The steps in this lab will create a new AWS lambda AspNetCore to act as your main website. We will also install all the required nuget packages and add/change the code for the workshop.
 
@@ -7,17 +7,21 @@ The steps in this lab will create a new AWS lambda AspNetCore to act as your mai
 
 
 1. Open a shell command or a Powershell command prompt.
-2. Install the Amazon.Lambda.Templates  blueprints by executing the following command :
+2. Install the AWS extensions for the dotnet CLI.
+    ```
+    dotnet tool install -g Amazon.Lambda.Tools
+    ```
+3. Install the Amazon.Lambda.Templates  blueprints by executing the following command :
    ```
    dotnet new -i "Amazon.Lambda.Templates::*"
    ```
-3. To see a list of the Lambda templates execute *dotnet new lambda --list*
-4. Create the WebApp project executing the following command:
+4. To see a list of the Lambda templates execute *dotnet new lambda --list*
+5. Create the WebApp project executing the following command:
    ```
    dotnet new serverless.AspNetCoreWebApp --name WebApp
    ```
    
-5. You now have a directory called WebApp with a C# project template for AspNetCore application.
+6. You now have a directory called WebApp with a C# project template for AspNetCore application.
 
 ### Opening your project at VSCode
 
