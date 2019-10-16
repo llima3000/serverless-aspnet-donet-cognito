@@ -191,12 +191,12 @@ Resources:
             inputs:
               sourceType: GitHub
               sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-config-sofware.yaml"}'
-              destinationPath: configSofware
+              destinationPath: configSoftware
           - action: aws:runDocument
             name: runConfigSofware
             inputs:
               documentType: LocalPath
-              documentPath: configSofware
+              documentPath: configSoftware
               documentParameters: '{}'
       DocumentType: Command
 
