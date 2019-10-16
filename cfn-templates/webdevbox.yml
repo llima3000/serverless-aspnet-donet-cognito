@@ -173,25 +173,25 @@ Resources:
               agentName: amazon-ssm-agent
               source: !Sub "https://s3.${AWS::Region}.amazonaws.com/aws-ssm-${AWS::Region}/ssm-agent-manifest.json"
           - action: aws:downloadContent
-            name: downloadContent
+            name: installSoftware
             inputs:
               sourceType: GitHub
               sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-install-sofware.yaml"}'
               destinationPath: installSoftware
           - action: aws:runDocument
-            name: runDocument
+            name: runInstallSoftware
             inputs:
               documentType: LocalPath
               documentPath: installSoftware
               documentParameters: '{}'
           - action: aws:downloadContent
-            name: downloadContent
+            name: configSofware
             inputs:
               sourceType: GitHub
               sourceInfo: '{"owner":"arturlr","repository":"awstoolbox", "path":"windows-dev-box-config-sofware.yaml"}'
               destinationPath: configSofware
           - action: aws:runDocument
-            name: runDocument
+            name: runConfigSofware
             inputs:
               documentType: LocalPath
               documentPath: configSofware
