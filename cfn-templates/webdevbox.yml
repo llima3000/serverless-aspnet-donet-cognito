@@ -19,7 +19,6 @@ Parameters:
     Description: Windows Server AMI Id
     Type: "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>"
     AllowedValues:
-      - "/aws/service/ami-windows-latest/Windows_Server-2016-English-Full-Base"
       - "/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base"
     Default: "/aws/service/ami-windows-latest/Windows_Server-2019-English-Full-Base"
 
