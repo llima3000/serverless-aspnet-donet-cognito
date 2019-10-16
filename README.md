@@ -1,6 +1,6 @@
 ## Build and monitor a secure Serverless app powered by AspNetCore WebApp with Amazon Cognito and x-Ray
 
-In this workshop you'll deploy a serverless web application based on AspNetCore that leverages the Amazon Cognito Hosted UI for sign-up and sign-in. During the sign-in process, the AspNetCore application receives the JWT token from Amazon Cognito, processed by the standard DotNetCore OpenIdConnect library. The AspNetCore of this workshop uses [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/) for processing the views. The AspNetCore will interface with serverless dotnet backend via a RESTful web service call. The backened RESTful API is exposed via Amazon API Gateway, which is integrated with the same Amazon Cognito that issued the JWT token for the AspNetCore, for authentication enforcement.  
+In this workshop you'll deploy a serverless web application based on AspNetCore that leverages the Amazon Cognito Hosted UI for sign-up and sign-in. During the sign-in process, the AspNetCore application receives the JWT token from Amazon Cognito, processed by the standard DotNetCore OpenIdConnect library. The AspNetCore will interface with a serverless dotnet backend via a RESTful web service call. The backened RESTful API is exposed via Amazon API Gateway, which is integrated with the same Amazon Cognito that issued the JWT token for the AspNetCore, hence providing authentication enforcement/seamless integration.
 
 See the diagram below for a depiction of the complete architecture.
 

@@ -7,15 +7,16 @@ The steps in this lab will create a new AWS lambda AspNetCore to act as your mai
 
 
 1. Open a shell command or a Powershell command prompt.
-2. Verify that you have the Serverless templates by typing:
+2. Install the Amazon.Lambda.Templates  blueprints by executing the following command :
    ```
-   dotnet new
+   dotnet new -i "Amazon.Lambda.Templates::*"
    ```
-3. Make sure you find templates names starting with *Lambda*. In case you can't see then, please check the requirements of this workshop.
-4. Create the WebApp project using the following command:
+3. To see a list of the Lambda templates execute *dotnet new lambda --list*
+4. Create the WebApp project executing the following command:
    ```
    dotnet new serverless.AspNetCoreWebApp --name WebApp
    ```
+   
 5. You now have a directory called WebApp with a C# project template for AspNetCore application.
 
 ### Opening your project at VSCode
@@ -30,21 +31,22 @@ The steps in this lab will create a new AWS lambda AspNetCore to act as your mai
 
    <img src="../images/vscodeterminal.png" width="450"/>
 
-2. At VSCOde terminal window install all the nuget packages by typing:
+2. At Visual Code terminal window install all the nuget packages by typing:
 
    <img src="../images/vscodenuget.png" width="450"/>
 
 3. Add all these packages:
    ```
-   dotnet add package Newtonsoft.Json
-   dotnet add package AWSSDK.Lambda
-   dotnet add package Amazon.Lambda.Core
-   dotnet add package AWSSDK.Extensions.NETCore.Setup
-   dotnet add package AWSSDK.CognitoIdentityProvider
-   dotnet add package AWS.Logger.Core
-   dotnet add package Amazon.Lambda.APIGatewayEvents
+   dotnet add package Newtonsoft.Json -v 12.0.2
+   dotnet add package AWSSDK.Lambda -v 3.3.103
+   dotnet add package Amazon.Lambda.Core -v 1.1.0
+   dotnet add package AWSSDK.Extensions.NETCore.Setup -v 3.3.100
+   dotnet add package AWSSDK.S3 -v 3.3.104
+   dotnet add package AWSSDK.CognitoIdentityProvider -v 3.3.103
+   dotnet add package AWS.Logger.Core -v 1.4.0
+   dotnet add package Amazon.Lambda.APIGatewayEvents -v 1.2.0
    dotnet add package AspNetCore.DataProtection.Aws.S3 -v 2.0.2
-   dotnet add package AWSXRayRecorder
+   dotnet add package AWSXRayRecorder -v 2.7.2
    ```
 4. You can verify if all the packages were installed by looking at the WebApp.csproj
    ```
@@ -56,5 +58,15 @@ The steps in this lab will create a new AWS lambda AspNetCore to act as your mai
    ```
 
 ### Change the project files
+
+1. Open the file *Startup.cs* on VisualCode.
+2. Replace its entire content with this [Script.cs](https://gist.github.com/arturlr/26c656f85b0aa9738414c8fdd7feff40)
+3. Make sure you project still compiles.
+    ```
+    dotnet publish -c Release
+    ```
+4. 
+
+
 
 ***You have now completed this module and can move onto [module 4](./Module4.md).***

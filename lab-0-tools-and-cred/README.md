@@ -50,7 +50,7 @@ Follow these steps to create a credential profile aws cli.
 2. Enter the command as shown below, pasting in the access and secret access key values from the csv file you downloaded in the previous step.
 
     ```
-    aws configure --profile-name <Your IAM username>
+    aws configure --profile <your profile-name>
     ```
 
     > Note: If you dont provide a profile name, the profile is automatically assigned to be the default profile.
@@ -100,4 +100,4 @@ In this step you will install the AWS extension for Visual Code, along with othe
 3. Select the region you want to connect
 4. You are now have connected VSCode with you AWS account.
 
-***You have now completed this module and can move onto [Lab 1](./lab-1-aspnetcode).***
+***You have now completed this module and can move onto [Lab 1](../lab-1-aspnetcode).***
