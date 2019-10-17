@@ -18,15 +18,15 @@ A laptop with Wi-Fi running Microsoft Windows and Mac OS X with the following so
 - An Internet browser such as Chrome, Firefox, Safari, or Edge.
 - The AWSCLI for [Windows](https://docs.aws.amazon.com/cli/latest/userguide/install-windows.html) or [Mac](https://docs.aws.amazon.com/cli/latest/userguide/install-macos.html)
 - The Long Term Support (LTS) [.NET Core](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) version supported by [AWS Lambda for .NET Core](https://github.com/aws/aws-lambda-dotnet). Link to download the correct version for [Windows](https://download.visualstudio.microsoft.com/download/pr/29f92590-ac92-45f0-99e8-e60c767dc4e9/ddc1014a788613364b5308d6c49db3db/dotnet-sdk-2.1.801-win-x64.exe) or [Mac](https://download.visualstudio.microsoft.com/download/pr/3998e58a-46dd-4f9c-a0e2-d17309de20fb/d694ddf3d8f99e8dee928e0b46f15084/dotnet-sdk-2.1.802-osx-x64.pkg)
-- You favorite IDE for .DotNet (VisualStudio or VSCode is recommended) 
-   <br>
+- You favorite IDE for .DotNet (VisualStudio or VSCode is recommended)
+
   > It is possible to execute non-LTS .NET Core on AWS, as per this [blog](https://aws.amazon.com/blogs/developer/announcing-amazon-lambda-runtimesupport/). For simplicity, this workshop is based on the LTS .NET Core version.
 
 
 #### AWS Account
 - Ability to create AWS resources including EC2, SSM, Lambda, Api Gateway, Cognito and IAM Roles.
 - EC2 key pair created in the AWS region you are working in in case you use the EC2 instance instead your own computer.
-<br>
+
 > **Important Note:** This guide creates chargeable AWS resources. You may wish to remove these resources upon completion of the guide to avoid incurring future charges to your account. To do this, be sure to follow the instructions in *Clean up* module.
 
 ## Modules

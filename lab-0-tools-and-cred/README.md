@@ -25,19 +25,20 @@ AWS strongly recommends creating an Identity and Access Management (IAM) user fo
     4.  Search: *xray*  Check: *AWSXrayFullAccess*
     5.  Search: *iam*  Check: *IAMFullAccess*
     6.  Search: *s3*  Check: *AmazonS3FullAccess*
+    7.  Search: *cloud*  Check: *AWSCloudFormationFullAccess*
 
     > **Note:** This specific user we are creating is for your local development purposes only. You can also use an existent IAM user as long as the IAM user has enough permissions.
 
-12. Click *Next: Tags*.
-13. You may add tags to the new user if you wish, they are not required for this guide.
-14. Click *Next: Review*.
-15. Review the selections to ensure the **Managed policy** has the following managed policies were associated:
+1.  Click *Next: Tags*.
+2.  You may add tags to the new user if you wish, they are not required for this guide.
+3.  Click *Next: Review*.
+4.  Review the selections to ensure the **Managed policy** has the following managed policies were associated:
     <img src="../images/iam-user-policies.png" width="350"/>
-16. Click *Create user*.
-17. **Important**. On the next screen click the **Download .csv** button to download a csv-formatted file containing the user's generated credentials to your machine. You will use these to create a credential profile for the user for use with the tools. You can also find the url to the console login for your new user displayed on this page. We recommend you sign into the console at this time. The password for the user is contained in the csv file you just downloaded.
+5.  Click *Create user*.
+6.  **Important**. On the next screen click the **Download .csv** button to download a csv-formatted file containing the user's generated credentials to your machine. You will use these to create a credential profile for the user for use with the tools. You can also find the url to the console login for your new user displayed on this page. We recommend you sign into the console at this time. The password for the user is contained in the csv file you just downloaded.
 
     > Note: this is the ***only*** time you will be able to obtain the secret access key for this user so do not skip downloading the file!
-18. Once you have downloaded the csv file, or made a note of the generated credentials (access *and* secret key) click *Close* to return to the *Users* home page in the IAM console.
+7.  Once you have downloaded the csv file, or made a note of the generated credentials (access *and* secret key) click *Close* to return to the *Users* home page in the IAM console.
 
 You have now created a new user in your account for use with the tools and can proceed to the next step to configure the tools to use this user's credentials.
 
@@ -100,4 +101,4 @@ In this step you will install the AWS extension for Visual Code, along with othe
 3. Select the region you want to connect
 4. You are now have connected VSCode with you AWS account.
 
-***You have now completed this module and can move onto [Lab 1](../lab-1-aspnetcode).***
+***You have now completed this module and can move onto [Lab 1](../lab-1-aspnetcore/).***
